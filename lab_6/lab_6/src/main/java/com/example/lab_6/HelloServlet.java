@@ -4,25 +4,39 @@ import java.io.*;
 
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import java.io.PrintWriter;
+import java.io.IOException;
 
 @WebServlet(name = "helloServlet", value = "/hello-servlet")
 public class HelloServlet extends HttpServlet {
-    private String message;
 
-    public void init() {
-        message = "Hello World!";
-    }
+    private static final long serialVersionUID = 1L;
 
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        response.setContentType("text/html");
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException
+    {
+// Получаем параметры запроса
+        String login = request.getParameter("LOGIN");
+        String password = request.getParameter("PASSWORD");
 
-        // Hello
+// Создаем экземпляр класса, который будет обрабатывать параметры запроса
+        NewProcess newProcess = new NewProcess();
+
+// Обрабатываем параметры запроса и получаем результат
+        String result = newProcess.newProcess(login, password);
+
+// Отправляем ответ клиенту
         PrintWriter out = response.getWriter();
         out.println("<html><body>");
-        out.println("<h1>" + message + "</h1>");
+        out.println("<h1>Form Submit Result:</h1>");
+        out.print(result);
         out.println("</body></html>");
     }
-
     public void destroy() {
     }
 }
