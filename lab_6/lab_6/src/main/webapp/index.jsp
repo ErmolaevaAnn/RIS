@@ -2,12 +2,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>JSP - Hello World</title>
+    <title>NewProcess</title>
 </head>
 <body>
-<h1><%= "Hello World! (by Ermolaeva Ann)" %>
+<h1><%= "Program by Ermolaeva Ann" %>
 </h1>
-<br/>
-<a href="hello-servlet">Hello Servlet</a>
+<form method="POST" action="/hello">
+    <label for="login">LOGIN:</label>
+    <input type="text" id="login" name="login">
+    <br><br>
+    <input type="submit" value="ВОЙТИ">
+</form>
 </body>
 </html>
